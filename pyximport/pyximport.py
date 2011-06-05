@@ -51,6 +51,7 @@ import sys
 import os
 import glob
 import imp
+import collections
 
 mod_name = "pyximport"
 
@@ -244,6 +245,8 @@ class PyxImporter(object):
         is_file = os.path.isfile
         #is_dir = os.path.isdir
         sep = os.path.sep
+        if not isinstance(paths, collections.Iterable):
+            paths = [os.path.dirname(os.path.abspath(paths.__file__))]
         for path in paths:
             if not path:
                 path = os.getcwd()
